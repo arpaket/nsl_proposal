@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSL | โครงการ Decision Support System (DSS)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #F4F4F4;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-step {
+            border: 2px solid #00AEEF;
+            transition: all 0.3s ease-in-out;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .flowchart-arrow {
+            color: #23395B;
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+         .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #00AEEF;
+            border: 4px solid #F4F4F4;
+        }
+        .kpi-stat {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: #23395B;
+        }
+    </style>
+</head>
+<body class="text-[#333333]">
+
+    <header class="bg-[#23395B] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">โครงการ Decision Support System (DSS)</h1>
+        <p class="text-xl md:text-2xl font-light text-[#00AEEF]">"Turning Data into Decisions"</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section class="bg-white rounded-lg shadow-md p-6 mb-8 text-center">
+            <h2 class="text-3xl font-bold text-[#23395B] mb-4">วิสัยทัศน์: ขับเคลื่อนองค์กรด้วยข้อมูล</h2>
+            <p class="text-lg max-w-3xl mx-auto mb-4">
+                โครงการ DSS เกิดขึ้นจากวิสัยทัศน์ของผู้บริหารที่ต้องการเปลี่ยนข้อมูลจำนวนมหาศาลที่มีอยู่ ให้กลายเป็น "สารสนเทศ" ที่ทรงพลัง เพื่อสร้างความเชื่อมั่นให้นักลงทุนและผู้มีส่วนได้ส่วนเสีย ผ่านการตัดสินใจที่แม่นยำและทันท่วงที
+            </p>
+            <div class="bg-gray-100 rounded-lg p-6 max-w-sm mx-auto">
+                <p class="text-lg text-gray-600 mb-2">เป้าหมายหลักในระยะแรก</p>
+                <p class="kpi-stat">3 Pillars</p>
+                <p class="text-md text-[#23395B] font-semibold">เพิ่มประสิทธิภาพ | ลดความสูญเสีย | ลดต้นทุน</p>
+            </div>
+        </section>
+        
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-[#23395B] mb-6 text-center">ทีมงานหลัก: The Architects of Insight</h2>
+             <p class="text-lg max-w-3xl mx-auto text-center mb-6">ความสำเร็จของโครงการต้องอาศัยทีมงานที่แข็งแกร่งและมีความเชี่ยวชาญในแต่ละด้าน เพื่อผนึกกำลังสร้างระบบที่ตอบโจทย์ธุรกิจได้อย่างแท้จริง</p>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="chart-container">
+                    <canvas id="teamSkillsChart"></canvas>
+                </div>
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-2xl font-bold text-center text-[#23395B] mb-6">บทบาทและทักษะสำคัญของทีม (Key Roles & Skills)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#23395B]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">Project Sponsor</h4>
+                            <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> ผู้นำแห่งการเปลี่ยนแปลง และผู้สนับสนุนหลักในระดับกลยุทธ์ จัดสรรทรัพยากร และขจัดอุปสรรคเพื่อผลักดันวิสัยทัศน์ของโครงการ</p>
+                            <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> สร้างวัฒนธรรมการขับเคลื่อนด้วยข้อมูล (Data-Driven Culture) ทั้งองค์กร</p>
+                             <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>วิสัยทัศน์เชิงกลยุทธ์ (Strategic Vision)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>การบริหารการเปลี่ยนแปลง (Change Management)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>การสื่อสารที่มีประสิทธิภาพ (Effective Communication)</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#00AEEF]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">Project Manager</h4>
+                            <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> ผู้บริหารจัดการโครงการให้สำเร็จตามเป้าหมาย (Scope), ตรงเวลา (Time), และอยู่ในงบประมาณ (Budget)</p>
+                            <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> ควบคุมและขับเคลื่อน แผนงาน 5 Phase ให้เป็นไปตาม Timeframe ที่กำหนด</p>
+                             <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>การบริหารผู้มีส่วนได้ส่วนเสีย (Stakeholder Management)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>การบริหารความเสี่ยง (Risk Management)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>ความรู้ด้าน Agile/Scrum</span></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#8AC926]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">Business Users</h4>
+                            <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> ตัวแทนของผู้ใช้งาน (User Representative) รวบรวมความต้องการ, เข้าร่วม UAT, และ รายงานสถานการณ์การใช้งาน ของระบบ DSS</p>
+                            <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> มั่นใจว่าระบบ ตอบโจทย์การใช้งานจริง และนำไปสู่การปฏิบัติงานที่มี ประสิทธิภาพ (Efficiency)</p>
+                             <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>ความรู้ เข้าใจในสายงานของผู้ใช้งานจริง</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>การสื่อสารที่มีประสิทธิภาพ</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>การให้ Feedback ที่ชัดเจน</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#00AEEF]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">Business / Data Analyst</h4>
+                            <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> สะพานเชื่อม ระหว่างธุรกิจและเทคนิค แปลงความต้องการทางธุรกิจ เป็นข้อกำหนดทางเทคนิค</p>
+                            <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> คิด วิเคราะห์ และปรับปรุง Workflow เพื่อนำระบบ DSS มาเสริมประสิทธิภาพ, ลดความซ้ำซ้อน และ Lean Process</p>
+                             <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>ความเข้าใจในธุรกิจ (Business Acumen)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>การเก็บรวบรวมความต้องการ (Requirement Elicitation)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#00AEEF] mt-1">✔</span><span>การเล่าเรื่องจากข้อมูล (Data Storytelling)</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#23395B]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">Data Engineer / IT</h4>
+                             <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> ผู้ออกแบบโครงสร้างพื้นฐานด้านข้อมูล และ ผู้ดูแลความมั่นคงปลอดภัยของระบบ พัฒนา ETL/ELT และดูแลระบบให้พร้อมใช้งาน</p>
+                             <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> ออกแบบสถาปัตยกรรมข้อมูลที่รองรับการเติบโต สร้าง Single Source of Truth และดูแลความปลอดภัยของข้อมูล</p>
+                              <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                             <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>การพัฒนา ETL/ELT</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>การจัดการฐานข้อมูล (Database Management)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#23395B] mt-1">✔</span><span>สถาปัตยกรรมข้อมูล (Data Architecture)</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-[#8AC926]">
+                            <h4 class="font-bold text-lg text-[#23395B] mb-3">BI Developer</h4>
+                            <p class="text-sm text-gray-700 mb-2"><b>บทบาทหลัก:</b> ผู้สร้างสรรค์ที่เปลี่ยนข้อมูลดิบให้กลายเป็นภาพ ออกแบบ Data Model และ พัฒนาระบบสารสนเทศ บนเครื่องมือ BI</p>
+                            <p class="text-sm text-gray-700 bg-gray-200 rounded p-2"><b>เป้าหมายหลัก:</b> สร้างระบบสารสนเทศ (Dashboard/Report) ให้ตรงตาม Business Requirement Document (BRD)</p>
+                             <h5 class="font-semibold text-sm text-gray-800 mt-3 mb-2">ทักษะที่จำเป็น:</h5>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>ความเชี่ยวชาญในเครื่องมือ BI (Power BI, Tableau)</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>หลักปฏิบัติที่ดีที่สุดในการสร้างภาพข้อมูล</span></li>
+                                <li class="flex items-start"><span class="mr-2 text-[#8AC926] mt-1">✔</span><span>การเพิ่มประสิทธิภาพ Dashboard</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-[#23395B] mb-6 text-center">กระบวนการทำงานของทีม (DSS Workflow)</h2>
+            <p class="text-lg max-w-3xl mx-auto text-center mb-8">เพื่อให้ได้มาซึ่ง Dashboard ที่ตอบโจทย์ทางธุรกิจ เรามีกระบวนการทำงานที่ชัดเจนตั้งแต่ต้นจนจบ เพื่อให้มั่นใจว่าทุกฝ่ายเข้าใจตรงกันและส่งมอบงานได้อย่างมีประสิทธิภาพ</p>
+            <div class="relative w-full">
+                <div class="absolute left-1/2 h-full w-1 bg-[#00AEEF] transform -translate-x-1/2 hidden md:block"></div>
+                <div class="space-y-12 md:space-y-0">
+                    
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="md:w-1/2 flex justify-start md:justify-end">
+                            <div class="w-full md:w-10/12 bg-white rounded-lg shadow-md p-6 relative md:mr-10 timeline-item">
+                                <h3 class="font-bold text-xl text-[#23395B]">ขั้นตอนที่ 1: รับโจทย์จากหน้างาน</h3>
+                                <p class="text-sm font-semibold text-gray-500 mt-2">ผู้รับผิดชอบหลัก: Business User</p>
+                                <div class="mt-2 text-gray-600 text-sm">
+                                   <p class="font-semibold">กระบวนการ:</p>
+                                   <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li>รวบรวมปัญหาการทำงาน (Pain Points), ความต้องการที่แท้จริง, และความคาดหวังจากผู้ใช้งานในแต่ละแผนก</li>
+                                       <li>อธิบายขั้นตอนการทำงานปัจจุบัน (As-Is Workflow) และชี้แจงประเด็นที่เป็นคอขวดหรือขั้นตอนที่ซ้ำซ้อน</li>
+                                   </ul>
+                                   <p class="font-semibold mt-2">ผลลัพธ์:</p>
+                                   <p class="ml-2">เอกสารสรุปปัญหาและโจทย์ทางธุรกิจเบื้องต้น ที่ต้องการนำข้อมูลมาช่วยในการแก้ไข</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="w-1/2 hidden md:block"></div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                         <div class="w-1/2 hidden md:block"></div>
+                        <div class="md:w-1/2 flex justify-start">
+                            <div class="w-full md:w-10/12 bg-white rounded-lg shadow-md p-6 relative md:ml-10 timeline-item">
+                                <h3 class="font-bold text-xl text-[#23395B]">ขั้นตอนที่ 2: แปลงความต้องการสู่ Solution</h3>
+                                <p class="text-sm font-semibold text-gray-500 mt-2">ผู้รับผิดชอบหลัก: Data Analyst</p>
+                                <div class="mt-2 text-gray-600 text-sm">
+                                   <p class="font-semibold">กระบวนการ:</p>
+                                   <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li>นำข้อมูลจาก Business User มาวิเคราะห์เชิงลึกเพื่อทำความเข้าใจรากของปัญหา (Root Cause Analysis)</li>
+                                       <li>คิด วิเคราะห์ และออกแบบกระบวนการทำงานใหม่ (To-Be Workflow) ที่ Lean และมีประสิทธิภาพกว่าเดิม โดยใช้ข้อมูลเป็นแกนหลัก</li>
+                                       <li>ระบุ Key Metrics และ KPIs ที่จำเป็นสำหรับการวัดผลและตัดสินใจ</li>
+                                       <li>ออกแบบโครงสร้างของรายงานและ Dashboard (Mock-up) ที่สามารถตอบโจทย์ทางธุรกิจได้จริง</li>
+                                   </ul>
+                                   <p class="font-semibold mt-2">ผลลัพธ์:</p>
+                                   <p class="ml-2">เอกสารความต้องการทางธุรกิจ (Business Requirement Document - BRD) ที่ระบุขอบเขต, วัตถุประสงค์, KPIs, และ Mock-up</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="md:w-1/2 flex justify-start md:justify-end">
+                            <div class="w-full md:w-10/12 bg-white rounded-lg shadow-md p-6 relative md:mr-10 timeline-item">
+                                <h3 class="font-bold text-xl text-[#23395B]">ขั้นตอนที่ 3: ส่งมอบโจทย์และประเมินผล</h3>
+                                <p class="text-sm font-semibold text-gray-500 mt-2">ผู้รับผิดชอบหลัก: Data Analyst 🤝 BI Developer & Data Engineer</p>
+                                 <div class="mt-2 text-gray-600 text-sm">
+                                   <p class="font-semibold">กระบวนการ:</p>
+                                   <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li>Data Analyst นำเสนอ BRD ให้กับทีม Developer และ Data Engineer เพื่อให้เกิดความเข้าใจตรงกัน</li>
+                                       <li>ทีมพัฒนาร่วมกันประเมินความเป็นไปได้ทางเทคนิค, ความเสี่ยง, และทรัพยากรที่ต้องใช้</li>
+                                   </ul>
+                                   <p class="font-semibold mt-2">ผลลัพธ์:</p>
+                                   <p class="ml-2">ความเข้าใจในโจทย์ที่ตรงกันทั้งทีม และแผนการพัฒนาเบื้องต้น</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="w-1/2 hidden md:block"></div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                         <div class="w-1/2 hidden md:block"></div>
+                        <div class="md:w-1/2 flex justify-start">
+                           <div class="w-full md:w-10/12 bg-white rounded-lg shadow-md p-6 relative md:ml-10 timeline-item">
+                                <h3 class="font-bold text-xl text-[#23395B]">ขั้นตอนที่ 4: สร้างสถาปัตยกรรมและพัฒนาระบบ</h3>
+                                <p class="text-sm font-semibold text-gray-500 mt-2">ผู้รับผิดชอบหลัก: BI Developer 🤝 Data Engineer</p>
+                                <div class="mt-2 text-gray-600 text-sm">
+                                   <p class="font-semibold">กระบวนการ:</p>
+                                   <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li><b>Data Engineer:</b> ออกแบบสถาปัตยกรรมข้อมูล, พัฒนากระบวนการ ETL/ELT, และดูแลความปลอดภัยของระบบ</li>
+                                       <li><b>BI Developer:</b> ออกแบบ Data Model, พัฒนา Dashboard และ Visualizations ต่างๆ ให้ตรงตาม BRD, และทำการทดสอบระบบเบื้องต้น (Unit Test)</li>
+                                   </ul>
+                                   <p class="font-semibold mt-2">ผลลัพธ์:</p>
+                                    <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li>Dashboard ต้นแบบ (Prototype) ที่พร้อมสำหรับให้ผู้ใช้งานทดสอบ (UAT)</li>
+                                       <li>โครงสร้างพื้นฐานด้านข้อมูล (Data Infrastructure) ที่พร้อมใช้งาน</li>
+                                   </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="md:w-1/2 flex justify-start md:justify-end">
+                            <div class="w-full md:w-10/12 bg-white rounded-lg shadow-md p-6 relative md:mr-10 timeline-item">
+                                <h3 class="font-bold text-xl text-[#23395B]">ขั้นตอนที่ 5: ผลลัพธ์สู่การตัดสินใจ</h3>
+                                <p class="text-sm font-semibold text-gray-500 mt-2">ผู้รับผิดชอบหลัก: ผู้บริหาร และ Business Users</p>
+                                <div class="mt-2 text-gray-600 text-sm">
+                                   <p class="font-semibold">กระบวนการ:</p>
+                                   <ul class="list-disc list-inside ml-2 space-y-1">
+                                       <li>นำ Dashboard ขึ้นใช้งานจริง (Go-Live) หลังจากผ่าน UAT และปรับปรุงแก้ไข</li>
+                                       <li>ผู้ใช้งานนำข้อมูลจาก Dashboard ไปประกอบการตัดสินใจทางธุรกิจในชีวิตประจำวัน</li>
+                                   </ul>
+                                   <p class="font-semibold mt-2">ผลลัพธ์:</p>
+                                   <p class="ml-2">องค์กรมีการตัดสินใจที่รวดเร็วและแม่นยำขึ้นโดยใช้ข้อมูลเป็นฐาน</p>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="w-1/2 hidden md:block"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold text-[#23395B] mb-6 text-center">สู่เป้าหมาย: วัฒนธรรมที่ขับเคลื่อนด้วยข้อมูล</h2>
+             <p class="text-lg max-w-3xl mx-auto text-center mb-8">เป้าหมายสูงสุดของโครงการไม่ใช่แค่การสร้าง Dashboard แต่คือการสร้างวัฒนธรรมองค์กรที่ทุกคนเชื่อมั่นและใช้ข้อมูลเป็นพื้นฐานในการตัดสินใจในทุกๆ วัน</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+                    <div class="text-6xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold text-[#8AC926] mb-2">เพิ่มประสิทธิภาพ</h3>
+                    <p class="mt-2">ลดขั้นตอนที่ซ้ำซ้อนและเวลาในการรวบรวมข้อมูลด้วยระบบอัตโนมัติ</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+                    <div class="text-6xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold text-[#8AC926] mb-2">ลดความสูญเสีย</h3>
+                    <p class="mt-2">มองเห็นจุดรั่วไหลในกระบวนการผลิตและปฏิบัติการได้ชัดเจนยิ่งขึ้น</p>
+                </div>
+                 <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center">
+                    <div class="text-6xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold text-[#8AC926] mb-2">ลดต้นทุน</h3>
+                    <p class="mt-2">วิเคราะห์โครงสร้างต้นทุนในมิติต่างๆ เพื่อหาโอกาสในการบริหารจัดการให้ดีขึ้น</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-8 bg-[#23395B] text-white">
+        <p>NSL | Decision Support System Project</p>
+    </footer>
+
+    <script>
+        const wrapLabels = (label) => {
+            if (typeof label === 'string' && label.length > 16) {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).length > 16 && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = currentLine ? currentLine + ' ' + word : word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            }
+            return label;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+
+        const defaultChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                         font: {
+                            family: "'Kanit', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        family: "'Kanit', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Kanit', sans-serif"
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                           family: "'Kanit', sans-serif"
+                        }
+                    }
+                },
+                y: {
+                     ticks: {
+                        font: {
+                           family: "'Kanit', sans-serif"
+                        }
+                    }
+                }
+            }
+        };
+
+        const teamSkillsCtx = document.getElementById('teamSkillsChart').getContext('2d');
+        const teamSkillsData = {
+            labels: [
+                'Business / Data Analyst', 
+                'Data Engineer / IT', 
+                'BI Developer'
+            ].map(wrapLabels),
+            datasets: [
+                {
+                    label: 'ทักษะด้านธุรกิจ',
+                    data: [5, 2, 3],
+                    backgroundColor: '#00AEEF',
+                    borderColor: '#00AEEF',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ทักษะด้านเทคนิค',
+                    data: [3, 5, 4],
+                    backgroundColor: '#23395B',
+                    borderColor: '#23395B',
+                    borderWidth: 1
+                },
+                {
+                    label: 'ทักษะด้านการสื่อสาร',
+                    data: [5, 3, 4],
+                    backgroundColor: '#8AC926',
+                    borderColor: '#8AC926',
+                    borderWidth: 1
+                }
+            ]
+        };
+        new Chart(teamSkillsCtx, {
+            type: 'bar',
+            data: teamSkillsData,
+            options: { ...defaultChartOptions, indexAxis: 'y' }
+        });
+    </script>
+</body>
+</html>
+
