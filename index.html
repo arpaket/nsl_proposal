@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NSL DSS | Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #f8fafc;
+    }
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 25px -5px rgba(0,0,0,0.1);
+    }
+    /* countdown style */
+    .time-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      min-width: 6rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center text-gray-800">
+
+  <!-- Countdown Section -->
+  <section class="text-center mb-16">
+    <h1 class="text-4xl md:text-5xl font-bold mb-8 text-sky-900">⏰ Countdown to Next Meeting</h1>
+    <p class="text-lg md:text-xl mb-8 text-sky-700">วันประชุมครั้งต่อไป (Our Next Sprint): 31 ตุลาคม 2568 เวลา 09:00 น.</p>
+
+    <div id="countdown" class="flex flex-wrap justify-center items-center gap-4 text-center">
+      <div class="time-box">
+        <p id="days" class="text-5xl font-bold">0</p>
+        <p class="text-gray-600">วัน</p>
+      </div>
+      <div class="time-box">
+        <p id="hours" class="text-5xl font-bold">0</p>
+        <p class="text-gray-600">ชั่วโมง</p>
+      </div>
+      <div class="time-box">
+        <p id="minutes" class="text-5xl font-bold">0</p>
+        <p class="text-gray-600">นาที</p>
+      </div>
+      <div class="time-box">
+        <p id="seconds" class="text-5xl font-bold">0</p>
+        <p class="text-gray-600">วินาที</p>
+      </div>
+    </div>
+
+    <p id="done" class="hidden text-3xl font-bold text-green-600 mt-10">🎉 ถึงวันประชุมแล้ว!</p>
+  </section>
+
+  <!-- Original Home Content -->
+  <header class="text-center mb-12">
+    <h1 class="text-5xl font-bold text-gray-900 mb-4">NSL DSS Portal</h1>
+    <p class="text-lg text-gray-600">"Turning Data into Decisions" – รวมศูนย์เนื้อหาการทำงานและโครงการ DSS</p>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 max-w-4xl">
+    <a href="dss1.html" target="_blank" rel="noopener noreferrer"
+       class="card bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center border-t-4 border-sky-600">
+      <div class="text-sky-600 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">โครงการ DSS</h2>
+      <p class="text-gray-600 mb-4">อธิบายภาพรวมโครงการ, ทีมงาน, ขั้นตอนการดำเนินงาน และเป้าหมายของระบบ Decision Support System (DSS)</p>
+      <span class="text-sky-600 font-semibold hover:underline">เปิดดูรายละเอียด →</span>
+    </a>
+
+    <a href="agile.html" target="_blank" rel="noopener noreferrer"
+       class="card bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center border-t-4 border-teal-500">
+      <div class="text-teal-500 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Agile Workflow</h2>
+      <p class="text-gray-600 mb-4">อธิบายแนวทางการทำงานของทีม DSS ด้วยหลักการ Agile เพื่อขับเคลื่อนการพัฒนาอย่างต่อเนื่อง</p>
+      <span class="text-teal-600 font-semibold hover:underline">เรียนรู้เพิ่มเติม →</span>
+    </a>
+  </main>
+
+  <footer class="text-center mt-16 text-gray-500 text-sm">
+    <p>จัดทำโดย DSS Team | NSL Foods PLC.</p>
+  </footer>
+
+  <!-- Countdown Script -->
+  <script>
+    const targetDate = new Date('2025-10-31T09:00:00+07:00').getTime();
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById("countdown").classList.add("hidden");
+        document.getElementById("done").classList.remove("hidden");
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
