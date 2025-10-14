@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรแกรมค้นหาวันในสัปดาห์</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Use a modern, readable font */
+        body {
+            font-family: 'Sarabun', 'Inter', sans-serif;
+        }
+        /* Custom styles for number input to hide arrows */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Card Container -->
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 transition-all">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-slate-800">วันอะไรเอ่ย?</h1>
+            <p class="text-slate-500 mt-2">เพียงกรอกวันที่ แล้วกด Enter เพื่อค้นหา</p>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="flex justify-center items-center space-x-4 mb-6">
+            <input 
+                type="number" 
+                id="day" 
+                placeholder="วัน" 
+                min="1" 
+                max="31"
+                class="w-24 p-3 text-center text-lg border-2 border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+            >
+            <input 
+                type="number" 
+                id="month" 
+                placeholder="เดือน" 
+                min="1" 
+                max="12"
+                class="w-24 p-3 text-center text-lg border-2 border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+            >
+            <input 
+                type="number" 
+                id="year" 
+                placeholder="ปี (ค.ศ.)"
+                class="w-28 p-3 text-center text-lg border-2 border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+            >
+        </div>
+
+        <!-- Result Display -->
+        <div id="result" class="text-center min-h-[6rem] flex items-center justify-center p-4 rounded-lg transition-all">
+            <!-- Result will be displayed here -->
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 border-t border-slate-200 pt-4">
+            <p class="text-sm text-slate-400">โปรแกรมโดย arpaket</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const dayInput = document.getElementById('day');
+        const monthInput = document.getElementById('month');
+        const yearInput = document.getElementById('year');
+        const resultDiv = document.getElementById('result');
+
+        /**
+         * Finds and displays the day of the week and Chinese Zodiac for the given date.
+         */
+        function findDayOfWeek() {
+            const day = dayInput.value;
+            const month = monthInput.value;
+            const year = yearInput.value;
+
+            // Clear previous result and styles
+            resultDiv.textContent = '';
+            resultDiv.className = 'text-center min-h-[6rem] flex flex-col items-center justify-center p-4 rounded-lg transition-all';
+
+
+            // 1. Validate for empty inputs
+            if (!day || !month || !year) {
+                displayMessage("กรุณากรอกข้อมูลให้ครบทุกช่อง", "error");
+                return;
+            }
+
+            // 2. Create a Date object. Note: month is 0-indexed in JS.
+            const date = new Date(year, month - 1, day);
+
+            // 3. Validate if the date is legitimate (e.g., handles Feb 30)
+            if (date.getFullYear() != year || date.getMonth() != month - 1 || date.getDate() != day) {
+                displayMessage("วันที่หรือเดือนที่ระบุไม่ถูกต้อง", "error");
+                return;
+            }
+
+            // 4. Get the day name
+            const daysOfWeek = ["วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ", "วันพฤหัสบดี", "วันศุกร์", "วันเสาร์"];
+            const dayName = daysOfWeek[date.getDay()];
+            
+            // 5. Calculate Chinese Zodiac
+            const zodiacAnimals = [
+                "วอก (ลิง)", "ระกา (ไก่)", "จอ (หมา)", "กุน (หมู)",
+                "ชวด (หนู)", "ฉลู (วัว)", "ขาล (เสือ)", "เถาะ (กระต่าย)",
+                "มะโรง (มังกร)", "มะเส็ง (งู)", "มะเมีย (ม้า)", "มะแม (แพะ)"
+            ];
+            const zodiacIndex = year % 12;
+            const zodiacName = zodiacAnimals[zodiacIndex];
+
+
+            // 6. Display the successful result
+            const resultText = `
+                <div class="text-xl">คือ <span class="font-bold text-2xl mx-2">${dayName}</span></div>
+                <div class="mt-2 text-md">ปีนักษัตร <span class="font-semibold">${zodiacName}</span></div>
+            `;
+            displayMessage(resultText, "success");
+        }
+        
+        /**
+         * Displays a message in the result div with appropriate styling.
+         * @param {string} message - The message to display (can be HTML).
+         * @param {'success' | 'error'} type - The type of message.
+         */
+        function displayMessage(message, type) {
+            resultDiv.innerHTML = message;
+            if (type === 'error') {
+                resultDiv.classList.add('bg-red-100', 'text-red-700');
+            } else {
+                resultDiv.classList.add('bg-blue-100', 'text-blue-800');
+            }
+        }
+
+        /**
+         * Handles the key press event to trigger the search on "Enter".
+         * @param {KeyboardEvent} event - The keyboard event object.
+         */
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                findDayOfWeek();
+            }
+        }
+
+        // Attach event listeners to all input fields
+        dayInput.addEventListener('keyup', handleKeyPress);
+        monthInput.addEventListener('keyup', handleKeyPress);
+        yearInput.addEventListener('keyup', handleKeyPress);
+    </script>
+
+</body>
+</html>
+
